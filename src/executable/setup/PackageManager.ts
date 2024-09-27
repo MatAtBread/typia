@@ -4,22 +4,6 @@ import path from "path";
 import { CommandExecutor } from "./CommandExecutor";
 import { FileRetriever } from "./FileRetriever";
 
-const managers = ["npm", "pnpm", "yarn", "bun"] as const;
-type Manager = (typeof managers)[number];
-
-const installCmdTable = {
-  npm: "install",
-  pnpm: "add",
-  yarn: "add",
-  bun: "add",
-} as const satisfies Record<Manager, string>;
-const devOptionTable = {
-  npm: "--save-dev",
-  pnpm: "--save-dev",
-  yarn: "--dev",
-  bun: "--dev",
-} as const satisfies Record<Manager, string>;
-
 export class PackageManager {
   public manager: Manager = "npm";
   public get file(): string {
@@ -56,14 +40,14 @@ export class PackageManager {
     modulo: string;
     version: string;
   }): boolean {
-    const cmd = installCmdTable[this.manager];
-    const option = props.dev ? devOptionTable[this.manager] : "";
-    const middle: string = `${cmd} ${option}` as const;
-    CommandExecutor.run(
-      `${this.manager} ${middle} ${props.modulo}${
-        props.version ? `@${props.version}` : ""
-      }`,
-    );
+    const middle: string = [
+      installCmdTable[this.manager],
+      props.dev ? devOptionTable[this.manager] : "",
+    ]
+      .filter((str) => !!str.length)
+      .join(" ");
+    const modulo: string = `${props.modulo}${props.version ? `@${props.version}` : ""}`;
+    CommandExecutor.run([this.manager, middle, modulo].join(" "));
     return true;
   }
 
@@ -84,3 +68,19 @@ export namespace Package {
     devDependencies?: Record<string, string>;
   }
 }
+
+type Manager = "npm" | "pnpm" | "yarn" | "bun";
+
+const installCmdTable = {
+  npm: "i",
+  pnpm: "add",
+  yarn: "add",
+  bun: "add",
+} as const satisfies Record<Manager, string>;
+
+const devOptionTable = {
+  npm: "-D",
+  pnpm: "-D",
+  yarn: "-D",
+  bun: "-d",
+} as const satisfies Record<Manager, string>;
