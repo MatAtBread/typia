@@ -276,7 +276,7 @@ export namespace RandomProgrammer {
         expressions.push(ts.factory.createStringLiteral("any type used..."));
 
       // NULL COALESCING
-      if (meta.isRequired() === false || meta.functional === true)
+      if (meta.isRequired() === false || meta.functions.length)
         expressions.push(ts.factory.createIdentifier("undefined"));
       if (meta.nullable === true) expressions.push(ts.factory.createNull());
 
@@ -443,7 +443,11 @@ export namespace RandomProgrammer {
                 return ts.factory.createCallExpression(
                   COALESCE(importer)("pattern"),
                   undefined,
-                  [ts.factory.createIdentifier(`/${t.value}/`)],
+                  [
+                    ts.factory.createIdentifier(
+                      `RegExp(${JSON.stringify(t.value)})`,
+                    ),
+                  ],
                 );
 
             const tail = RandomRanger.length(COALESCE(importer))({

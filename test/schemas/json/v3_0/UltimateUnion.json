@@ -5,10 +5,10 @@
       "UltimateUnion": {
         "type": "array",
         "items": {
-          "$ref": "#/components/schemas/IJsonApplication.IV3_1"
+          "$ref": "#/components/schemas/IJsonApplication.IV3_1Arrayunknown"
         }
       },
-      "IJsonApplication.IV3_1": {
+      "IJsonApplication.IV3_1Arrayunknown": {
         "type": "object",
         "properties": {
           "version": {
@@ -25,6 +25,10 @@
             "items": {
               "$ref": "#/components/schemas/OpenApi.IJsonSchema"
             }
+          },
+          "__types": {
+            "type": "array",
+            "items": {}
           }
         },
         "nullable": false,
@@ -133,6 +137,15 @@
             "type": "boolean",
             "title": "Whether the type is deprecated or not",
             "description": "Whether the type is deprecated or not."
+          },
+          "example": {
+            "title": "Example value",
+            "description": "Example value."
+          },
+          "examples": {
+            "$ref": "#/components/schemas/Recordstringany",
+            "title": "List of example values as key-value pairs",
+            "description": "List of example values as key-value pairs."
           }
         },
         "nullable": false,
@@ -140,6 +153,13 @@
           "const"
         ],
         "description": "Constant value type."
+      },
+      "Recordstringany": {
+        "type": "object",
+        "properties": {},
+        "nullable": false,
+        "description": "Construct a type with a set of properties K of type T",
+        "additionalProperties": {}
       },
       "OpenApi.IJsonSchema.IBoolean": {
         "type": "object",
@@ -171,6 +191,15 @@
             "type": "boolean",
             "title": "Whether the type is deprecated or not",
             "description": "Whether the type is deprecated or not."
+          },
+          "example": {
+            "title": "Example value",
+            "description": "Example value."
+          },
+          "examples": {
+            "$ref": "#/components/schemas/Recordstringany",
+            "title": "List of example values as key-value pairs",
+            "description": "List of example values as key-value pairs."
           }
         },
         "nullable": false,
@@ -236,6 +265,15 @@
             "type": "boolean",
             "title": "Whether the type is deprecated or not",
             "description": "Whether the type is deprecated or not."
+          },
+          "example": {
+            "title": "Example value",
+            "description": "Example value."
+          },
+          "examples": {
+            "$ref": "#/components/schemas/Recordstringany",
+            "title": "List of example values as key-value pairs",
+            "description": "List of example values as key-value pairs."
           }
         },
         "nullable": false,
@@ -301,6 +339,15 @@
             "type": "boolean",
             "title": "Whether the type is deprecated or not",
             "description": "Whether the type is deprecated or not."
+          },
+          "example": {
+            "title": "Example value",
+            "description": "Example value."
+          },
+          "examples": {
+            "$ref": "#/components/schemas/Recordstringany",
+            "title": "List of example values as key-value pairs",
+            "description": "List of example values as key-value pairs."
           }
         },
         "nullable": false,
@@ -364,6 +411,15 @@
             "type": "boolean",
             "title": "Whether the type is deprecated or not",
             "description": "Whether the type is deprecated or not."
+          },
+          "example": {
+            "title": "Example value",
+            "description": "Example value."
+          },
+          "examples": {
+            "$ref": "#/components/schemas/Recordstringany",
+            "title": "List of example values as key-value pairs",
+            "description": "List of example values as key-value pairs."
           }
         },
         "nullable": false,
@@ -417,6 +473,15 @@
             "type": "boolean",
             "title": "Whether the type is deprecated or not",
             "description": "Whether the type is deprecated or not."
+          },
+          "example": {
+            "title": "Example value",
+            "description": "Example value."
+          },
+          "examples": {
+            "$ref": "#/components/schemas/Recordstringany",
+            "title": "List of example values as key-value pairs",
+            "description": "List of example values as key-value pairs."
           }
         },
         "nullable": false,
@@ -519,6 +584,15 @@
             "type": "boolean",
             "title": "Whether the type is deprecated or not",
             "description": "Whether the type is deprecated or not."
+          },
+          "example": {
+            "title": "Example value",
+            "description": "Example value."
+          },
+          "examples": {
+            "$ref": "#/components/schemas/Recordstringany",
+            "title": "List of example values as key-value pairs",
+            "description": "List of example values as key-value pairs."
           }
         },
         "nullable": false,
@@ -611,6 +685,15 @@
             "type": "boolean",
             "title": "Whether the type is deprecated or not",
             "description": "Whether the type is deprecated or not."
+          },
+          "example": {
+            "title": "Example value",
+            "description": "Example value."
+          },
+          "examples": {
+            "$ref": "#/components/schemas/Recordstringany",
+            "title": "List of example values as key-value pairs",
+            "description": "List of example values as key-value pairs."
           }
         },
         "nullable": false,
@@ -641,6 +724,15 @@
             "type": "boolean",
             "title": "Whether the type is deprecated or not",
             "description": "Whether the type is deprecated or not."
+          },
+          "example": {
+            "title": "Example value",
+            "description": "Example value."
+          },
+          "examples": {
+            "$ref": "#/components/schemas/Recordstringany",
+            "title": "List of example values as key-value pairs",
+            "description": "List of example values as key-value pairs."
           }
         },
         "nullable": false,
@@ -713,6 +805,15 @@
             "type": "boolean",
             "title": "Whether the type is deprecated or not",
             "description": "Whether the type is deprecated or not."
+          },
+          "example": {
+            "title": "Example value",
+            "description": "Example value."
+          },
+          "examples": {
+            "$ref": "#/components/schemas/Recordstringany",
+            "title": "List of example values as key-value pairs",
+            "description": "List of example values as key-value pairs."
           }
         },
         "nullable": false,
@@ -751,6 +852,15 @@
             "type": "boolean",
             "title": "Whether the type is deprecated or not",
             "description": "Whether the type is deprecated or not."
+          },
+          "example": {
+            "title": "Example value",
+            "description": "Example value."
+          },
+          "examples": {
+            "$ref": "#/components/schemas/Recordstringany",
+            "title": "List of example values as key-value pairs",
+            "description": "List of example values as key-value pairs."
           }
         },
         "nullable": false,
@@ -776,6 +886,15 @@
             "type": "boolean",
             "title": "Whether the type is deprecated or not",
             "description": "Whether the type is deprecated or not."
+          },
+          "example": {
+            "title": "Example value",
+            "description": "Example value."
+          },
+          "examples": {
+            "$ref": "#/components/schemas/Recordstringany",
+            "title": "List of example values as key-value pairs",
+            "description": "List of example values as key-value pairs."
           }
         },
         "nullable": false,
