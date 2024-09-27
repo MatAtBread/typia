@@ -177,6 +177,7 @@ const significant = (functional: boolean) =>
         ts.isPropertyDeclaration(node) ||
         ts.isPropertyAssignment(node) ||
         ts.isPropertySignature(node) ||
+        ts.isMethodSignature(node) ||
         ts.isTypeLiteralNode(node);
 
 const iterate_optional_coalesce = (meta: Metadata, type: ts.Type): void => {
