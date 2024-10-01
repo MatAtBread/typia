@@ -176,9 +176,12 @@ const significant = (functional: boolean) =>
         ts.isParameter(node) ||
         ts.isPropertyDeclaration(node) ||
         ts.isPropertyAssignment(node) ||
+        ts.isShorthandPropertyAssignment(node) ||
         ts.isPropertySignature(node) ||
         ts.isTypeLiteralNode(node) ||
-        ts.isShorthandPropertyAssignment(node);
+        ts.isShorthandPropertyAssignment(node) ||
+        ts.isMethodSignature(node) ||
+        ts.isMethodDeclaration(node);
 
 const iterate_optional_coalesce = (meta: Metadata, type: ts.Type): void => {
   if (type.isUnionOrIntersection())
