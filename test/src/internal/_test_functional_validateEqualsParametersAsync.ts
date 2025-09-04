@@ -6,12 +6,11 @@ import { TestStructure } from "../helpers/TestStructure";
 export const _test_functional_validateEqualsParametersAsync =
   (name: string) =>
   <T>(factory: TestStructure<T>) =>
-  (
+  async (
     validate: (
       p: (input: T) => Promise<T>,
     ) => (input: T) => Promise<IValidation<T>>,
-  ) =>
-  async () => {
+  ): Promise<void> => {
     const task =
       (replacer: string) => async (callback: (input: T) => [T, T]) => {
         // SUCCESS
@@ -34,9 +33,10 @@ export const _test_functional_validateEqualsParametersAsync =
         if (expected.length === 0) return;
 
         const [x, y] = callback(input);
-        const actual: string[] = (await validate(async () => y)(x)).errors
-          .map((err) => err.path)
-          .sort();
+        const result: IValidation<T> = await validate(async () => y)(x);
+        const actual: string[] = result.success
+          ? []
+          : result.errors.map((err) => err.path).sort();
         if (
           expected.length !== actual.length ||
           expected.every((str, i) => str === actual[i]) === false

@@ -1,5 +1,6 @@
 import { ClassProperties } from "../../typings/ClassProperties";
 
+import { IProtobufProperty } from "../protobuf/IProtobufProperty";
 import { IJsDocTagInfo } from "./IJsDocTagInfo";
 import { IMetadataDictionary } from "./IMetadataDictionary";
 import { IMetadataProperty } from "./IMetadataProperty";
@@ -11,12 +12,12 @@ export class MetadataProperty {
   public readonly description: string | null;
   public readonly jsDocTags: IJsDocTagInfo[];
 
+  public of_protobuf_?: IProtobufProperty;
+
   /* -----------------------------------------------------------
         CONSTRUCTORS
     ----------------------------------------------------------- */
-  /**
-   * @hidden
-   */
+  /** @ignore */
   private constructor(props: ClassProperties<MetadataProperty>) {
     this.key = props.key;
     this.value = props.value;
@@ -24,18 +25,14 @@ export class MetadataProperty {
     this.jsDocTags = props.jsDocTags;
   }
 
-  /**
-   * @internal
-   */
+  /** @internal */
   public static create(
     props: ClassProperties<MetadataProperty>,
   ): MetadataProperty {
     return new MetadataProperty(props);
   }
 
-  /**
-   * @internal
-   */
+  /** @internal */
   public static from(property: IMetadataProperty, dict: IMetadataDictionary) {
     return MetadataProperty.create({
       key: Metadata.from(property.key, dict),

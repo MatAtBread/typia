@@ -7,14 +7,13 @@ export const _test_misc_assertClone =
   (ErrorClass: Function) =>
   (name: string) =>
   <T>(factory: TestStructure<T>) =>
-  (clone: (input: T) => Resolved<T>) =>
-  () => {
+  (clone: (input: T) => Resolved<T>): void => {
     const input: T = factory.generate();
     const cloned: Resolved<T> = clone(input);
 
     if (resolved_equal_to(name)(input, cloned) === false) {
       throw new Error(
-        `Bug on TSON.assertClone(): failed to understand the ${name} type.`,
+        `Bug on typia.misc.assertClone(): failed to understand the ${name} type.`,
       );
     }
 
@@ -36,7 +35,7 @@ export const _test_misc_assertClone =
             });
       }
       throw new Error(
-        `Bug on TSON.assertClone(): failed to detect error on the ${name} type.`,
+        `Bug on typia.misc.assertClone(): failed to detect error on the ${name} type.`,
       );
     }
   };

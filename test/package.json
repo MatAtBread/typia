@@ -4,19 +4,16 @@
   "version": "0.1.0",
   "description": "Test program for typia",
   "main": "bin/index.js",
-  "tsp": {
-    "tscOptions": {
-      "parseAllJsDoc": true
-    }
-  },
   "scripts": {
     "build": "rimraf bin && tsc",
     "build_run": "npm run build",
-    "generate": "rimraf generated && rimraf bin-generated && node --max-old-space-size=8000 node_modules/typia/lib/executable/typia generate --input src --output generated --project tsconfig.generated.json && rimraf generated/features/functional* && rimraf generated/features/issues && node --max-old-space-size=8000 node_modules/typescript/bin/tsc --project tsconfig.generated.json",
+    "generate": "typia generate --input generate/input --output generate/output --project tsconfig.generate.json && tsc --project tsconfig.generate.json && prettier generate/output/*.ts --write && ts-node build/validate-generate.ts",
     "prepare": "ts-patch install",
     "prettier": "prettier ./src/**/*.ts --write",
     "setup": "node build/setup.js",
     "start": "node bin",
+    "debug": "ts-node debug",
+    "issue": "ts-node issue",
     "template": "ts-node --project build/tsconfig.json build/template.ts"
   },
   "repository": {
@@ -32,26 +29,27 @@
   "bugs": {
     "url": "https://github.com/samchon/typia/issues"
   },
-  "homepage": "https://github.com/samchon/typia#readme",
+  "homepage": "https://typia.io",
   "devDependencies": {
     "@trivago/prettier-plugin-sort-imports": "^4.3.0",
     "@types/cli": "^0.11.25",
     "@types/node": "^20.9.4",
     "@types/uuid": "^9.0.7",
     "prettier": "^3.2.5",
+    "prettier-plugin-jsdoc": "^1.3.3",
     "rimraf": "^5.0.5",
     "ts-node": "^10.9.2",
-    "ts-patch": "^3.2.1",
-    "typescript": "^5.5.4"
+    "ts-patch": "^3.3.0",
+    "typescript": "~5.9.2"
   },
   "dependencies": {
     "cli": "^1.0.1",
-    "protobufjs": "^7.2.5",
+    "protobufjs": "7.2.5",
     "randexp": "^0.5.3",
     "source-map-support": "^0.5.21",
     "suppress-warnings": "^1.0.2",
     "tstl": "^3.0.0",
-    "uuid": "^9.0.1",
-    "typia": "../typia-6.8.0.tgz"
+    "typia": "workspace:^",
+    "uuid": "^9.0.1"
   }
 }

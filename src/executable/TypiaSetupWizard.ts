@@ -1,4 +1,5 @@
 import fs from "fs";
+import { DetectResult, detect } from "package-manager-detector";
 
 import { ArgumentParser } from "./setup/ArgumentParser";
 import { CommandExecutor } from "./setup/CommandExecutor";
@@ -11,17 +12,21 @@ export namespace TypiaSetupWizard {
     project: string | null;
   }
 
-  export async function setup(): Promise<void> {
+  export const setup = async (): Promise<void> => {
     console.log("----------------------------------------");
     console.log(" Typia Setup Wizard");
     console.log("----------------------------------------");
 
     // PREPARE ASSETS
     const pack: PackageManager = await PackageManager.mount();
-    const args: IArguments = await ArgumentParser.parse(pack)(inquiry);
+    const args: IArguments = await ArgumentParser.parse(pack, inquiry);
 
     // INSTALL TYPESCRIPT COMPILERS
-    pack.install({ dev: true, modulo: "typescript", version: "5.5.2" });
+    pack.install({
+      dev: true,
+      modulo: "typescript",
+      version: await getTypeScriptVersion(),
+    });
     pack.install({ dev: true, modulo: "ts-patch", version: "latest" });
     args.project ??= (() => {
       const runner: string = pack.manager === "npm" ? "npx" : pack.manager;
@@ -35,22 +40,18 @@ export namespace TypiaSetupWizard {
       data.scripts ??= {};
       if (
         typeof data.scripts.prepare === "string" &&
-        data.scripts.prepare.trim().length
+        data.scripts.prepare.trim().length !== 0
       ) {
-        if (
-          data.scripts.prepare.indexOf("ts-patch install") === -1 &&
-          data.scripts.prepare.indexOf("typia patch") === -1
-        )
-          data.scripts.prepare =
-            "ts-patch install && typia patch && " + data.scripts.prepare;
-        else if (data.scripts.prepare.indexOf("ts-patch install") === -1)
+        if (data.scripts.prepare.includes("ts-patch install") === false)
           data.scripts.prepare = "ts-patch install && " + data.scripts.prepare;
-        else if (data.scripts.prepare.indexOf("typia patch") === -1)
-          data.scripts.prepare = data.scripts.prepare.replace(
-            "ts-patch install",
-            "ts-patch install && typia patch",
-          );
-      } else data.scripts.prepare = "ts-patch install && typia patch";
+      } else data.scripts.prepare = "ts-patch install";
+
+      // NO MORE "typia patch" REQUIRED
+      data.scripts.prepare = data.scripts.prepare
+        .split("&&")
+        .map((str) => str.trim())
+        .filter((str) => str !== "typia patch")
+        .join(" && ");
 
       // FOR OLDER VERSIONS
       if (typeof data.scripts.postinstall === "string") {
@@ -67,7 +68,7 @@ export namespace TypiaSetupWizard {
     // CONFIGURE TYPIA
     await PluginConfigurator.configure(args);
     CommandExecutor.run(`${pack.manager} run prepare`);
-  }
+  };
 
   const inquiry: ArgumentParser.Inquiry<IArguments> = async (
     pack,
@@ -95,11 +96,7 @@ export namespace TypiaSetupWizard {
             name: name,
             message: message,
             choices: choices,
-            ...(filter
-              ? {
-                  filter,
-                }
-              : {}),
+            ...(filter ? { filter } : {}),
           })
         )[name];
       };
@@ -131,21 +128,44 @@ export namespace TypiaSetupWizard {
 
     // DO CONSTRUCT
     return action(async (options) => {
-      pack.manager = options.manager ??= await select("manager")(
-        "Package Manager",
-      )(
-        [
-          "npm" as const,
-          "pnpm" as const,
-          "bun" as const,
-          "yarn (berry is not supported)" as "yarn",
-        ],
-        (value) => value.split(" ")[0] as "yarn",
-      );
+      pack.manager = options.manager ??=
+        (await detectManager()) ??
+        (await select("manager")("Package Manager")(
+          [
+            "npm" as const,
+            "pnpm" as const,
+            "bun" as const,
+            "yarn (berry is not supported)" as "yarn",
+          ],
+          (value) => value.split(" ")[0] as "yarn",
+        ));
       options.project ??= await configure();
 
       if (questioned.value) console.log("");
       return options as IArguments;
     });
+  };
+
+  const detectManager = async (): Promise<
+    "npm" | "pnpm" | "yarn" | "bun" | null
+  > => {
+    const result: DetectResult | null = await detect({ cwd: process.cwd() });
+    switch (result?.name) {
+      case "npm":
+      case "deno":
+        return null; // NPM case is still selectable & Deno is not supported
+      default:
+        return result?.name ?? null;
+    }
+  };
+
+  const getTypeScriptVersion = async (): Promise<string> => {
+    const content: string = await fs.promises.readFile(
+      `${__dirname}/../../package.json`,
+      "utf-8",
+    );
+    const json: { devDependencies: { typescript: string } } =
+      JSON.parse(content);
+    return json.devDependencies.typescript;
   };
 }

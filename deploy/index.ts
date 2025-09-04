@@ -19,29 +19,37 @@ const main = async (): Promise<void> => {
   }
   await DeployRunner.main({
     tag,
-    publish: tag !== "tgz",
+    publish: tag !== "test",
     setup: true,
-    testExecutors: [
-      {
-        name: "test",
-        commands:
-          tag === "tgz" && template === true
-            ? ["npm run template", "npm run build", "npm start"]
-            : ["npm run build", "npm start"],
-      },
-      {
-        name: "test-esm",
-        commands: ["npm run build", "npm start"],
-      },
-      {
-        name: "errors",
-        commands: ["npm start"],
-      },
-      {
-        name: "benchmark",
-        commands: ["npm run build"],
-      },
-    ],
+    testExecutors:
+      tag === "test"
+        ? [
+            {
+              name: "test",
+              commands:
+                tag === "test" && template === true
+                  ? [
+                      "pnpm run template",
+                      "pnpm run build",
+                      "pnpm start",
+                      "pnpm run generate",
+                    ]
+                  : ["pnpm run build", "pnpm start", "pnpm run generate"],
+            },
+            {
+              name: "test-esm",
+              commands: ["pnpm run build", "pnpm start"],
+            },
+            {
+              name: "test-error",
+              commands: ["pnpm start"],
+            },
+            {
+              name: "benchmark",
+              commands: ["pnpm run build"],
+            },
+          ]
+        : [],
   });
 };
 main().catch((exp) => {

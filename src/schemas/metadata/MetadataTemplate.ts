@@ -7,7 +7,7 @@ import { Metadata } from "./Metadata";
 
 export class MetadataTemplate {
   public readonly row: Metadata[];
-  public tags: IMetadataTypeTag[][] | undefined;
+  public readonly tags: IMetadataTypeTag[][];
 
   private name_?: string;
 
@@ -36,9 +36,7 @@ export class MetadataTemplate {
     return (this.name_ ??= getName(this));
   }
 
-  /**
-   * @internal
-   */
+  /** @internal */
   public getBaseName(): string {
     return (
       "`" +

@@ -8,24 +8,20 @@ export class MetadataTuple {
   public readonly type: MetadataTupleType;
   public readonly tags: IMetadataTypeTag[][];
 
-  /**
-   * @hidden
-   */
+  /** @ignore */
   private constructor(props: ClassProperties<MetadataTuple>) {
     this.type = props.type;
     this.tags = props.tags;
   }
 
-  /**
-   * @internal
-   */
+  /** @internal */
   public static create(props: ClassProperties<MetadataTuple>): MetadataTuple {
     return new MetadataTuple(props);
   }
 
   public toJSON(): IMetadataTuple {
     return {
-      type: this.type.toJSON(),
+      name: this.type.name,
       tags: this.tags.map((row) => row.slice()),
     };
   }

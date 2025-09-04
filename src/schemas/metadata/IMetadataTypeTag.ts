@@ -1,7 +1,7 @@
 import type ts from "typescript";
 
 export interface IMetadataTypeTag {
-  target: "boolean" | "bigint" | "number" | "string" | "array";
+  target: "boolean" | "bigint" | "number" | "string" | "array" | "object";
   name: string;
   kind: string;
   exclusive: boolean | string[];
@@ -9,8 +9,6 @@ export interface IMetadataTypeTag {
   validate?: string | undefined;
   schema?: object | undefined;
 
-  /**
-   * @internal
-   */
+  /** @internal */
   predicate?: (input: ts.Expression) => ts.Expression;
 }

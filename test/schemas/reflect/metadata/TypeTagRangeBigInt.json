@@ -5,7 +5,7 @@
       "required": true,
       "optional": false,
       "nullable": false,
-      "functional": false,
+      "functions": [],
       "atomics": [],
       "constants": [],
       "templates": [],
@@ -14,7 +14,10 @@
       "arrays": [],
       "tuples": [],
       "objects": [
-        "TypeTagRangeBigInt"
+        {
+          "name": "TypeTagRangeBigInt",
+          "tags": []
+        }
       ],
       "aliases": [],
       "natives": [],
@@ -33,14 +36,15 @@
               "required": true,
               "optional": false,
               "nullable": false,
-              "functional": false,
+              "functions": [],
               "atomics": [],
               "constants": [
                 {
                   "type": "string",
                   "values": [
                     {
-                      "value": "value"
+                      "value": "value",
+                      "tags": []
                     }
                   ]
                 }
@@ -61,7 +65,7 @@
               "required": true,
               "optional": false,
               "nullable": false,
-              "functional": false,
+              "functions": [],
               "atomics": [],
               "constants": [],
               "templates": [],
@@ -100,14 +104,15 @@
               "required": true,
               "optional": false,
               "nullable": false,
-              "functional": false,
+              "functions": [],
               "atomics": [],
               "constants": [
                 {
                   "type": "string",
                   "values": [
                     {
-                      "value": "greater"
+                      "value": "greater",
+                      "tags": []
                     }
                   ]
                 }
@@ -128,7 +133,7 @@
               "required": true,
               "optional": false,
               "nullable": false,
-              "functional": false,
+              "functions": [],
               "atomics": [
                 {
                   "type": "bigint",
@@ -148,8 +153,7 @@
                           "minimum"
                         ],
                         "schema": {
-                          "exclusiveMinimum": true,
-                          "minimum": 3
+                          "exclusiveMinimum": 3
                         }
                       }
                     ]
@@ -177,14 +181,15 @@
               "required": true,
               "optional": false,
               "nullable": false,
-              "functional": false,
+              "functions": [],
               "atomics": [],
               "constants": [
                 {
                   "type": "string",
                   "values": [
                     {
-                      "value": "greater_equal"
+                      "value": "greater_equal",
+                      "tags": []
                     }
                   ]
                 }
@@ -205,7 +210,7 @@
               "required": true,
               "optional": false,
               "nullable": false,
-              "functional": false,
+              "functions": [],
               "atomics": [
                 {
                   "type": "bigint",
@@ -253,14 +258,15 @@
               "required": true,
               "optional": false,
               "nullable": false,
-              "functional": false,
+              "functions": [],
               "atomics": [],
               "constants": [
                 {
                   "type": "string",
                   "values": [
                     {
-                      "value": "less"
+                      "value": "less",
+                      "tags": []
                     }
                   ]
                 }
@@ -281,7 +287,7 @@
               "required": true,
               "optional": false,
               "nullable": false,
-              "functional": false,
+              "functions": [],
               "atomics": [
                 {
                   "type": "bigint",
@@ -301,8 +307,7 @@
                           "maximum"
                         ],
                         "schema": {
-                          "exclusiveMaximum": true,
-                          "maximum": 7
+                          "exclusiveMaximum": 7
                         }
                       }
                     ]
@@ -330,14 +335,15 @@
               "required": true,
               "optional": false,
               "nullable": false,
-              "functional": false,
+              "functions": [],
               "atomics": [],
               "constants": [
                 {
                   "type": "string",
                   "values": [
                     {
-                      "value": "less_equal"
+                      "value": "less_equal",
+                      "tags": []
                     }
                   ]
                 }
@@ -358,7 +364,7 @@
               "required": true,
               "optional": false,
               "nullable": false,
-              "functional": false,
+              "functions": [],
               "atomics": [
                 {
                   "type": "bigint",
@@ -406,14 +412,15 @@
               "required": true,
               "optional": false,
               "nullable": false,
-              "functional": false,
+              "functions": [],
               "atomics": [],
               "constants": [
                 {
                   "type": "string",
                   "values": [
                     {
-                      "value": "greater_less"
+                      "value": "greater_less",
+                      "tags": []
                     }
                   ]
                 }
@@ -434,7 +441,7 @@
               "required": true,
               "optional": false,
               "nullable": false,
-              "functional": false,
+              "functions": [],
               "atomics": [
                 {
                   "type": "bigint",
@@ -454,8 +461,7 @@
                           "minimum"
                         ],
                         "schema": {
-                          "exclusiveMinimum": true,
-                          "minimum": 3
+                          "exclusiveMinimum": 3
                         }
                       },
                       {
@@ -472,8 +478,7 @@
                           "maximum"
                         ],
                         "schema": {
-                          "exclusiveMaximum": true,
-                          "maximum": 7
+                          "exclusiveMaximum": 7
                         }
                       }
                     ]
@@ -501,14 +506,15 @@
               "required": true,
               "optional": false,
               "nullable": false,
-              "functional": false,
+              "functions": [],
               "atomics": [],
               "constants": [
                 {
                   "type": "string",
                   "values": [
                     {
-                      "value": "greater_equal_less"
+                      "value": "greater_equal_less",
+                      "tags": []
                     }
                   ]
                 }
@@ -529,7 +535,7 @@
               "required": true,
               "optional": false,
               "nullable": false,
-              "functional": false,
+              "functions": [],
               "atomics": [
                 {
                   "type": "bigint",
@@ -566,8 +572,7 @@
                           "maximum"
                         ],
                         "schema": {
-                          "exclusiveMaximum": true,
-                          "maximum": 7
+                          "exclusiveMaximum": 7
                         }
                       }
                     ]
@@ -595,14 +600,15 @@
               "required": true,
               "optional": false,
               "nullable": false,
-              "functional": false,
+              "functions": [],
               "atomics": [],
               "constants": [
                 {
                   "type": "string",
                   "values": [
                     {
-                      "value": "greater_less_equal"
+                      "value": "greater_less_equal",
+                      "tags": []
                     }
                   ]
                 }
@@ -623,7 +629,7 @@
               "required": true,
               "optional": false,
               "nullable": false,
-              "functional": false,
+              "functions": [],
               "atomics": [
                 {
                   "type": "bigint",
@@ -643,8 +649,7 @@
                           "minimum"
                         ],
                         "schema": {
-                          "exclusiveMinimum": true,
-                          "minimum": 3
+                          "exclusiveMinimum": 3
                         }
                       },
                       {
@@ -689,14 +694,15 @@
               "required": true,
               "optional": false,
               "nullable": false,
-              "functional": false,
+              "functions": [],
               "atomics": [],
               "constants": [
                 {
                   "type": "string",
                   "values": [
                     {
-                      "value": "greater_equal_less_equal"
+                      "value": "greater_equal_less_equal",
+                      "tags": []
                     }
                   ]
                 }
@@ -717,7 +723,7 @@
               "required": true,
               "optional": false,
               "nullable": false,
-              "functional": false,
+              "functions": [],
               "atomics": [
                 {
                   "type": "bigint",
@@ -782,14 +788,15 @@
               "required": true,
               "optional": false,
               "nullable": false,
-              "functional": false,
+              "functions": [],
               "atomics": [],
               "constants": [
                 {
                   "type": "string",
                   "values": [
                     {
-                      "value": "equal"
+                      "value": "equal",
+                      "tags": []
                     }
                   ]
                 }
@@ -810,7 +817,7 @@
               "required": true,
               "optional": false,
               "nullable": false,
-              "functional": false,
+              "functions": [],
               "atomics": [
                 {
                   "type": "bigint",
@@ -887,7 +894,7 @@
           "required": true,
           "optional": false,
           "nullable": false,
-          "functional": false,
+          "functions": [],
           "atomics": [],
           "constants": [],
           "templates": [],
@@ -896,7 +903,10 @@
           "arrays": [],
           "tuples": [],
           "objects": [
-            "TypeTagRangeBigInt.Type"
+            {
+              "name": "TypeTagRangeBigInt.Type",
+              "tags": []
+            }
           ],
           "aliases": [],
           "natives": [],

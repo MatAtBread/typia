@@ -10,9 +10,7 @@ export class MetadataArray {
 
   private name_?: string;
 
-  /**
-   * @hidden
-   */
+  /** @ignore */
   private constructor(props: ClassProperties<MetadataArray>) {
     this.type = props.type;
     this.tags = props.tags;
@@ -42,7 +40,7 @@ export class MetadataArray {
 
   public toJSON(): IMetadataArray {
     return {
-      type: this.type.toJSON(),
+      name: this.type.name,
       tags: this.tags.map((row) => row.slice()),
     };
   }

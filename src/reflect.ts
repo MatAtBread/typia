@@ -1,5 +1,7 @@
 import { IMetadataApplication } from "./schemas/metadata/IMetadataApplication";
 
+import { NoTransformConfigurationError } from "./transformers/NoTransformConfigurationError";
+
 /**
  * > You must configure the generic argument `Types`.
  *
@@ -11,12 +13,11 @@ import { IMetadataApplication } from "./schemas/metadata/IMetadataApplication";
  * stored in the {@link IMetadataApplication.components} property. Also, alias
  * types are stored in the {@link IMetadataApplication.aliases} property, too.
  *
+ * @author Jeongho Nam - https://github.com/samchon
  * @template Types Tuple of target types
  * @returns Metadata application
- *
- * @author Jeongho Nam - https://github.com/samchon
  */
-function metadata(): never;
+export function metadata(): never;
 
 /**
  * Metadata Application.
@@ -27,37 +28,19 @@ function metadata(): never;
  * stored in the {@link IMetadataApplication.components} property. Also, alias
  * types are stored in the {@link IMetadataApplication.aliases} property, too.
  *
+ * @author Jeongho Nam - https://github.com/samchon
  * @template Types Tuple of target types
  * @returns Metadata application
- *
- * @author Jeongho Nam - https://github.com/samchon
  */
-function metadata<Types extends unknown[]>(): IMetadataApplication;
+export function metadata<Types extends unknown[]>(): IMetadataApplication;
 
-/**
- * @internal
- */
-function metadata(): never {
-  halt("metadata");
+/** @internal */
+export function metadata(): never {
+  NoTransformConfigurationError("reflect.metadata");
 }
-
-const metadataPure = /** @__PURE__ */ Object.assign<typeof metadata, {}>(
-  metadata,
-  { from: (input: unknown) => input },
-);
-export { metadataPure as metadata };
 
 export function name<T, Regular extends boolean = false>(): string;
 export function name(): never;
 export function name(): never {
-  halt("name");
-}
-
-/**
- * @internal
- */
-function halt(name: string): never {
-  throw new Error(
-    `Error on typia.reflect.${name}(): no transform has been configured. Read and follow https://typia.io/docs/setup please.`,
-  );
+  NoTransformConfigurationError("reflect.name");
 }

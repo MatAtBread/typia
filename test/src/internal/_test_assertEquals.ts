@@ -7,8 +7,7 @@ export const _test_assertEquals =
   (ErrorClass: Function) =>
   (name: string) =>
   <T>(factory: TestStructure<T>) =>
-  (assertEquals: (input: T) => T) =>
-  () => {
+  (assertEquals: (input: T) => T): void => {
     const input: T = factory.generate();
 
     // EXACT TYPE
@@ -51,7 +50,8 @@ export const _test_assertEquals =
         if (
           (exp as Function).constructor?.name === ErrorClass.name &&
           typia.is<TypeGuardError.IProps>(exp) &&
-          exp.method === "typia.assertEquals" &&
+          (exp.method === "typia.assertEquals" ||
+            exp.method === "typia.createAssertEquals") &&
           exp.path === fullPath &&
           exp.expected === "undefined" &&
           exp.value === key
